@@ -11,10 +11,10 @@ const routes: Routes = [
   {path:'login',  component: LoginComponent},
   {path:'signup',  component: SignupComponent},
   {path:'booksearch',  component: BooksearchComponent, 
-  // canActivate: [AuthrouteGuard]
+  canActivate: [AuthrouteGuard]
 },
   {path:'bookshelf', component: BookshelfComponent,
-  //  canActivate: [AuthrouteGuard]
+   canActivate: [AuthrouteGuard]
   }
 ];
 
