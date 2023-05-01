@@ -3,6 +3,7 @@ import { BookService } from 'src/services/bookservice.service';
 import { Observable, from, map } from 'rxjs';
 import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
+import { Book } from 'src/interfaces/book';
 
 @Component({
   selector: 'app-booksearch',
@@ -10,7 +11,7 @@ import Swal from 'sweetalert2';
   styleUrls: ['./booksearch.component.css'],
 })
 export class BooksearchComponent implements OnInit {
-  searchedBooks: any[] = [];
+  searchedBooks: Array<any>;
   filterBooks: any;
   title: any;
   timer: Boolean = true;
@@ -49,22 +50,18 @@ export class BooksearchComponent implements OnInit {
       .subscribe((book) => {
         if (this.isBookInShelf(book.id)) {
           Swal.fire('book already present in the shelf');
-          
         } else {
           this.bookservice.addBook(srcShelf, book);
           Swal.fire(`Book added successfully to ${srcShelf}`);
           this.router.navigate(['/bookshelf']);
-         
         }
       });
   }
 
   isBookInShelf(bookId: string): boolean {
     let bookFound = false;
-    let result = [];
     this.bookservice.bookinput.subscribe((books) => {
       const book = books.find((b) => b.id === bookId);
-      console.log(book);
       if (book) {
         bookFound = true;
       }

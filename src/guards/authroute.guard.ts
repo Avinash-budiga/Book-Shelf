@@ -20,25 +20,14 @@ export class AuthrouteGuard implements CanActivate {
     state: RouterStateSnapshot
   ): Observable<boolean> | Promise<boolean> | boolean {
     return this.auth.authState.pipe(
-
-            map((user) => {
-      
-              console.log(user);
-      
-              if (user) {
-      
-                return true;
-      
-              } else {
-      
-                this.router.navigate(['/']);
-      
-                return false;
-      
-              }
-      
-            })
-      
-          );
+      map((user) => {
+        if (user) {
+          return true;
+        } else {
+          this.router.navigate(['/']);
+          return false;
+        }
+      })
+    );
   }
 }

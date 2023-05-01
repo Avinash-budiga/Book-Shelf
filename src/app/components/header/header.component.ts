@@ -6,20 +6,43 @@ import Swal from 'sweetalert2';
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
-  styleUrls: ['./header.component.css']
+  styleUrls: ['./header.component.css'],
 })
-export class HeaderComponent  implements OnInit{
+export class HeaderComponent implements OnInit {
+
+  username:string;
+  userpath:string;
   currentRoute: string;
-  constructor(private auth:AuthService, private route: ActivatedRoute){}
+  
+  constructor(private auth: AuthService, private route: ActivatedRoute) {}
 
   ngOnInit() {
+    this.userpath = localStorage.getItem('user');
     this.currentRoute = this.route.snapshot.routeConfig.path;
+    this.auth.getUser(this.userpath).subscribe((res)=>{
+      this.username = res['username'];
+    })
   }
 
-  logout(){
-    Swal.fire("Are you sure want to logout");
-    
-    this.auth.SignOutUser();
-  }
 
+  logout() {
+    Swal.fire({
+      title: 'Are you sure want ot logout?',
+      icon: 'info',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        Swal.fire(
+          'Logged out Successfully!'
+        );
+        this.auth.SignOutUser();
+      } else if(result.isDenied) {
+        
+      }
+    });
+   
+  }
 }

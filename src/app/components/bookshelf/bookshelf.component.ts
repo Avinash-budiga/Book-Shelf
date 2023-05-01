@@ -17,32 +17,38 @@ export class BookshelfComponent implements OnInit {
   currentlyReadingBooks: Array<Book>;
   wantToReadBooks: Array<Book>;
   readBooks: Array<Book>;
-  allBooks:Array<Book>;
+  allBooks: Array<Book>;
   timer: boolean;
 
-  constructor(
-    private bookservice: BookService
-  ) { }
+  constructor(private bookservice: BookService) {}
 
   ngOnInit(): void {
     this.timer = false;
-    this.bookservice.getBookslist('want-to-read').subscribe((res) => {
-      this.wantToReadBooks = res;
-      this.combineBooks();
-    });
-    this.bookservice.getBookslist('currently-reading').subscribe((res) => {
-      this.currentlyReadingBooks = res;
-      this.combineBooks();
-    });
-    this.bookservice.getBookslist('read-done').subscribe((res) => {
-      this.readBooks = res;
+    this.wantToReadBooks = [];
+    this.currentlyReadingBooks = [];
+    this.readBooks = [];
+    this.loadBooks('want-to-read', this.wantToReadBooks);
+    this.loadBooks('currently-reading', this.currentlyReadingBooks);
+    this.loadBooks('read-done', this.readBooks);
+  }
+
+  //load books method:get the books form db and load ino respective array;
+  loadBooks(Shelf: string, shelfarray: Array<Book>) {
+    this.bookservice.getBookslist(Shelf).subscribe((res) => {
+      shelfarray.length = 0;
+      Array.prototype.push.apply(shelfarray, res);
       this.combineBooks();
     });
   }
+
   //merge books:
   combineBooks(): void {
     if (this.wantToReadBooks && this.currentlyReadingBooks && this.readBooks) {
-      this.allBooks = [...this.wantToReadBooks, ...this.currentlyReadingBooks, ...this.readBooks];
+      this.allBooks = [
+        ...this.wantToReadBooks,
+        ...this.currentlyReadingBooks,
+        ...this.readBooks,
+      ];
       this.bookservice.bookinput.next(this.allBooks);
       this.timer = true;
     }
@@ -50,14 +56,17 @@ export class BookshelfComponent implements OnInit {
 
   //move book method
   traverseBook(srcShelf: string, destShelf: string, id: string): void {
-    this.bookservice.getBook(srcShelf, id).subscribe((book: Book) => {
-      if (book) {
-        this.bookservice.moveBook(destShelf, book);
+    this.bookservice.getBook(srcShelf, id).subscribe(
+      (book: Book) => {
+        if (book) {
+          this.bookservice.moveBook(destShelf, book);
+        }
+        this.bookservice.deleteBook(srcShelf, id);
+      },
+      (err) => {
+        console.error(err);
       }
-      this.bookservice.deleteBook(srcShelf, id);
-    }, (err) =>{
-      console.error(err);
-    }, ()=>{console.log('complete')});
+    );
   }
 
   //Remove book:

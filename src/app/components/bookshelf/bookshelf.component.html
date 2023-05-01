@@ -18,11 +18,11 @@
             <div class="col-md-4" *ngFor="let book of currentlyReadingBooks" cdkDrag [cdkDragData]="book">
               <div class="card mb-3 border border-success" style="max-width: 350px;">
                 <div class="row g-0">
-                  <div class="col-md-4">
+                  <div class="col-md-6">
                     <img [src]="book.url" alt="book-image" class="img-fluid card-img"
                       style="width: 100%; height: 200px; object-fit: cover;">
                   </div>
-                  <div class="col-md-8">
+                  <div class="col-md-6">
                     <div class="card-body">
                       <h3 class="card-title">{{book.title}}</h3>
                       <p class="card-text">Authors: {{book.author}}</p>
@@ -61,15 +61,15 @@
         <div class="col-md-12 card-header">
           <h2 class="text-center">Want-To-Read</h2>
           <hr>
-          <div *ngIf="wantToReadBooks?.length; else noBooks" class="row">
+          <div *ngIf="wantToReadBooks?.length; else nowantToReadBooks" class="row">
             <div class="col-md-4" *ngFor="let book of wantToReadBooks" cdkDrag [cdkDragData]="book">
               <div class="card mb-3 border border-success" style="max-width: 350px;">
                 <div class="row g-0">
-                  <div class="col-md-4">
+                  <div class="col-md-6">
                     <img [src]="book.url" alt="book-image" class="img-fluid card-img"
                       style="width: 100%; height: 200px; object-fit: cover;">
                   </div>
-                  <div class="col-md-8">
+                  <div class="col-md-6">
                     <div class="card-body">
                       <h3 class="card-title">{{book.title}}</h3>
                       <p class="card-text">Authors: {{book.author}}</p>
@@ -93,7 +93,7 @@
               </div>
             </div>
           </div>
-          <ng-template #noBooks>
+          <ng-template #nowantToReadBooks>
             <p class="text-center">No books in the want-to-read list.</p>
           </ng-template>
         </div>
@@ -108,15 +108,15 @@
         <div class="col-md-12 card-header">
           <h2 class="text-center">Read Done</h2>
           <hr>
-          <div *ngIf="readBooks?.length; else noBooks" class="row">
+          <div *ngIf="readBooks?.length; else noreadBooks" class="row">
             <div class="col-md-4" *ngFor="let book of readBooks" cdkDrag [cdkDragData]="book">
               <div class="card mb-3 border border-success" style="max-width: 350px;">
                 <div class="row g-0">
-                  <div class="col-md-4">
+                  <div class="col-md-6">
                     <img [src]="book.url" alt="book-image" class="img-fluid card-img"
                       style="width: 100%; height: 200px; object-fit: cover;">
                   </div>
-                  <div class="col-md-8">
+                  <div class="col-md-6">
                     <div class="card-body">
                       <h3 class="card-title">{{book.title}}</h3>
                       <p class="card-text">Authors: {{book.author}}</p>
@@ -141,7 +141,7 @@
               </div>
             </div>
           </div>
-          <ng-template #noBooks>
+          <ng-template #noreadBooks>
             <p class="text-center">No books in the read-done list.</p>
           </ng-template>
         </div>

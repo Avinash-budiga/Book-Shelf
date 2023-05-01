@@ -6,6 +6,8 @@ import {
   Validators,
 } from '@angular/forms';
 import { AuthService } from '../../../services/auth.service';
+import { AngularFireAuth } from '@angular/fire/compat/auth';
+import { map } from 'rxjs';
 
 @Component({
   selector: 'app-signup',
@@ -15,24 +17,30 @@ import { AuthService } from '../../../services/auth.service';
 export class SignupComponent implements OnInit {
   registrationForm: FormGroup;
   submitted = false;
+  validPattern = "^[a-zA-Z0-9]{10}$";
 
   constructor(
     private formBuilder: FormBuilder,
-    private authService: AuthService
+    private authService: AuthService,
+    private auth: AngularFireAuth
   ) {}
 
   ngOnInit() {
     this.registrationForm = this.formBuilder.group({
+      username: [
+        '',
+        [Validators.required, Validators.pattern(this.validPattern)]
+      ],
       email: [
         '',
-        [Validators.required, Validators.email, this.noWhitespaceValidator],
+        [Validators.required, Validators.email, this.noWhitespaceValidator]
       ],
       password: [
         '',
         [
           Validators.required,
           Validators.minLength(8),
-          this.noWhitespaceValidator,
+          this.noWhitespaceValidator
         ],
       ],
     });
@@ -51,6 +59,7 @@ export class SignupComponent implements OnInit {
   onSubmit() {
     this.submitted = true;
     this.authService.CreateUser(
+      this.f['username'].value,
       this.f['email'].value,
       this.f['password'].value
     );
