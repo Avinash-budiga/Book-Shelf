@@ -1,0 +1,69 @@
+<!-- registration.component.html -->
+
+<div class="container mt-4">
+    <div class="row justify-content-center">
+      <div class="col-md-6">
+        <div class="card">
+          <div class="card-header">
+            <h3 class="mb-0">Register</h3>
+          </div>
+          <div class="card-body">
+            <form [formGroup]="registrationForm" (ngSubmit)="onSubmit()">
+              <div class="form-group">
+                <label for="email">UserName<span class="text-danger">*</span></label>
+                <input type="email" formControlName="username" class="form-control">
+                <div *ngIf="registrationForm.controls['email']?.['errors'] && registrationForm.controls['email']?.['touched']" class="text-danger">
+                    <small *ngIf="registrationForm.controls['username']?.['errors']?.['required']">
+                        Required
+                    </small>
+                    <small *ngIf="registrationForm.controls['username']?.['errors']?.['pattern']">
+                        Invalid
+                    </small>
+                    <small *ngIf="registrationForm.get('Username').errors?.['whitespace']">
+                        email cannot be empty
+                    </small>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="email">Email Address<span class="text-danger">*</span></label>
+                <input type="email" formControlName="email" class="form-control">
+                <div *ngIf="registrationForm.controls['email']?.['errors'] && registrationForm.controls['email']?.['touched']" class="text-danger">
+                    <small *ngIf="registrationForm.controls['email']?.['errors']?.['required']">
+                        Required
+                    </small>
+                    <small *ngIf="registrationForm.controls['email']?.['errors']?.['email']">
+                        Invalid
+                    </small>
+                    <small *ngIf="registrationForm.get('email').errors?.['whitespace']">
+                        email cannot be empty
+                    </small>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="password">Password<span class="text-danger">*</span></label>
+                <input type="password" formControlName="password" class="form-control">
+                <div *ngIf="submitted && registrationForm['password']?.invalid && (registrationForm['password'].dirty || registrationForm['password'].touched)" class="alert alert-danger">
+                    <small *ngIf="registrationForm['password'].errors.required">
+                        Required.
+                    </small>
+                </div>
+                <div *ngIf="registrationForm.controls['password']?.['errors'] && registrationForm.controls['password']?.['touched']" class="text-danger">
+                    <small *ngIf="registrationForm.controls['password']?.['errors']?.['required']">
+                        Required
+                    </small>
+                    <small *ngIf="registrationForm.get('password').errors?.['whitespace']">
+                        password cannot be empty
+                    </small>
+                </div>
+              </div>
+              <div class="form-group mt-4">
+                <button class="btn btn-primary mr-2" [disabled]="registrationForm.invalid">Register</button>
+                <a [routerLink]="['/login']" class="btn btn-link">Login</a>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  

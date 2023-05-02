@@ -1,0 +1,23 @@
+<div class="searchbanner">
+    <button class="arrow rounded-circle back" routerLink="/bookshelf"><span class="material-icons"> arrow_back</span></button>
+  
+    <div class="text-center mt-2">
+      <div class="label pt-4">
+        <h2>Search Books:</h2>
+      </div>
+      <div class="search-fields w-50 mx-auto">
+        <input class="form-control  input-field" type="text" [(ngModel)]="searchQuery" (keyup)="onSearch()" placeholder="Search books...">
+        <select class="select-field" [(ngModel)]="category" (change)="onSearch()">
+          <option value="Category">Category</option>
+          <option value="Title">Title</option>
+        </select>
+      </div>
+    </div>
+  
+    <div class="card w-50 mx-auto">
+      <div class="search">
+        <div *ngFor="let suggestion of suggestions" (click)="selectSuggestion(suggestion)">{{ suggestion.volumeInfo.title }}</div>
+      </div>
+    </div>
+  </div>
+  

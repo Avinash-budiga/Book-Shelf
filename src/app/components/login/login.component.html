@@ -1,0 +1,64 @@
+<div class="container-fluid mt-4">
+  <div class="row justify-content-center align-items-center">
+    <div class="col-md-6">
+      <div class="card">
+        <div class="card-header">
+          <h2 class="text-center">Login</h2>
+        </div>
+        <div class="card-body">
+          <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+            <div class="form-group">
+              <label for="email">Email Address <span class="text-danger">*</span></label>
+              <input type="email" formControlName="email" class="form-control" [ngClass]="{
+                    'is-invalid': submitted && loginForm.controls['email'].errors
+                  }" />
+              <div *ngIf="loginForm.controls['email']?.['errors'] && loginForm.controls['email']?.['touched']"
+                class="text-danger">
+                <small *ngIf="loginForm.controls['email']?.['errors']?.['required']">
+                  Required
+                </small>
+                <small *ngIf="loginForm.controls['email']?.['errors']?.['email']">
+                  Invalid
+                </small>
+                <small *ngIf="loginForm.get('email').errors?.['whitespace']">
+                  email cannot be empty
+                </small>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="password">Password<span class="text-danger">*</span></label>
+              <input type="password" formControlName="password" class="form-control" [ngClass]="{
+                    'is-invalid':
+                      submitted && loginForm.controls['password'].errors
+                  }" />
+              <div *ngIf="
+                    submitted &&
+                    loginForm['password']?.invalid &&
+                    (loginForm['password'].dirty || loginForm['password'].touched)
+                  " class="alert alert-danger">
+                <small *ngIf="loginForm['password'].errors.required">
+                  Required.
+                </small>
+              </div>
+              <div *ngIf="loginForm.controls['password']?.['errors'] && loginForm.controls['password']?.['touched']"
+                class="text-danger">
+                <small *ngIf="loginForm.controls['password']?.['errors']?.['required']">
+                  Required
+                </small>
+                <small *ngIf="loginForm.get('password').errors?.['whitespace']">
+                  password cannot be empty
+                </small>
+              </div>
+            </div>
+            <div class="form-group">
+              <button class="btn btn-primary mr-2 mt-2" type="submit" [disabled]="loginForm.invalid">
+                Login
+              </button>
+              <a [routerLink]="['/signup']" class="btn btn-link">Signup</a>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

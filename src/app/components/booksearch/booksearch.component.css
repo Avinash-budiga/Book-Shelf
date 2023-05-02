@@ -1,0 +1,9 @@
+.card-img {
+    width: 150px;
+    height: 200px;
+  }
+
+  .loading {
+    position: relative;
+    left: 45%;
+  }
