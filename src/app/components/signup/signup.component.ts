@@ -52,16 +52,16 @@ export class SignupComponent implements OnInit {
     return isValid ? null : { whitespace: true };
   }
 
-  get f() {
+  get form() {
     return this.registrationForm.controls;
   }
 
   onSubmit() {
     this.submitted = true;
-    this.authService.CreateUser(
-      this.f['username'].value,
-      this.f['email'].value,
-      this.f['password'].value
+    this.authService.createUser(
+      this.form['username'].value,
+      this.form['email'].value,
+      this.form['password'].value
     );
   }
 }

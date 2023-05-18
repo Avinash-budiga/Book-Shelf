@@ -24,7 +24,7 @@ export class HeaderComponent implements OnInit {
     })
   }
 
-
+  //user logout:
   logout() {
     Swal.fire({
       title: 'Are you sure want ot logout?',
@@ -38,11 +38,8 @@ export class HeaderComponent implements OnInit {
         Swal.fire(
           'Logged out Successfully!'
         );
-        this.auth.SignOutUser();
-      } else if(result.isDenied) {
-        
-      }
+        this.auth.signOutUser();
+      } else if(result.isDenied) {}
     });
-   
   }
 }

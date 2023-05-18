@@ -29,7 +29,7 @@ export class LoginComponent implements OnInit {
 
   onSubmit() {
     this.submitted=true;
-    this.auth.SignInUser(this.email.value, this.password.value);
+    this.auth.signInUser(this.email.value, this.password.value);
   }
 
   get email() { return this.loginForm.get('email'); }

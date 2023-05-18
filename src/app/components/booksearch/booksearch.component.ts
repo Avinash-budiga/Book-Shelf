@@ -61,7 +61,7 @@ export class BooksearchComponent implements OnInit {
   isBookInShelf(bookId: string): boolean {
     let bookFound = false;
     this.bookservice.bookinput.subscribe((books) => {
-      const book = books.find((b) => b.id === bookId);
+      const book = books.find((shelfbook) => shelfbook.id === bookId);
       if (book) {
         bookFound = true;
       }

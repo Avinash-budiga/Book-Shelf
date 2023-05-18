@@ -18,7 +18,7 @@ export class AuthService {
   ) {}
 
   //signin method:
-  SignInUser(email: string, password: string) {
+  signInUser(email: string, password: string) {
     this.auth
       .signInWithEmailAndPassword(email, password)
       .then((userCredential) => {
@@ -31,7 +31,7 @@ export class AuthService {
   }
 
   //signup method:
-  CreateUser(username: string, email: any, pwd: any) {
+  createUser(username: string, email: any, pwd: any) {
     this.auth.createUserWithEmailAndPassword(email, pwd).then(
       (userCredential) => {
         this.userData = {
@@ -51,7 +51,7 @@ export class AuthService {
   }
 
   //log out:
-  SignOutUser() {
+  signOutUser() {
     this.auth.signOut().then(
       () => {
         localStorage.removeItem('user');

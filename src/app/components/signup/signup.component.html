@@ -10,9 +10,9 @@
           <div class="card-body">
             <form [formGroup]="registrationForm" (ngSubmit)="onSubmit()">
               <div class="form-group">
-                <label for="email">UserName<span class="text-danger">*</span></label>
-                <input type="email" formControlName="username" class="form-control">
-                <div *ngIf="registrationForm.controls['email']?.['errors'] && registrationForm.controls['email']?.['touched']" class="text-danger">
+                <label for="username">UserName<span class="text-danger">*</span></label>
+                <input type="text" formControlName="username" class="form-control">
+                <div *ngIf="registrationForm.controls['username']?.['errors'] && registrationForm.controls['username']?.['touched']" class="text-danger">
                     <small *ngIf="registrationForm.controls['username']?.['errors']?.['required']">
                         Required
                     </small>
