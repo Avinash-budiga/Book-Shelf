@@ -1,0 +1,57 @@
+.searchbanner {
+    background-image: url(https://www.gstatic.com/pantheon/images/marketplace/cameo_banner-1x.png);
+    min-height: 280px;
+    background-size: cover;
+    overflow-x: hidden;
+    margin-bottom: 20px;
+  }
+  
+  .back-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 24px;
+    color: #000;
+  }
+  
+  .search-fields {
+    display: flex;
+    flex-grow: 1;
+    gap: 10px;
+    border-radius: 5px;
+  }
+  
+  input[type="text"] {
+    flex-grow: 6;
+    height: 40px;
+  }
+  
+  select {
+    flex-grow: 4;
+    height: 40px;
+    border-radius: 5px;
+  }
+  
+  .back {
+    margin:10px 0 0 10px;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    border: 2px solid #fff;
+    background-color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+  }
+  
+  .back:hover {
+    background-color: whitesmoke;
+  }
+
+  .card-img {
+    width: 150px;
+    height: 200px;
+  }
